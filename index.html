@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SendHome Daily Rate Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="SendHome home">
+        <span class="brand-mark">SH</span>
+        <span>SendHome</span>
+      </a>
+      <nav aria-label="Main navigation">
+        <a href="#calculator">Calculator</a>
+        <a href="#rates">Rates</a>
+        <a href="#how">How it works</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <img src="assets/sendhome-remittance-hero.png" alt="Person sending money with a phone" class="hero-image">
+        <div class="hero-shade"></div>
+        <div class="hero-content">
+          <p class="eyebrow">Daily remittance rates</p>
+          <h1>SendHome daily money transfer rates.</h1>
+          <p class="lead">Choose a country, enter how much you want to send, and the calculator shows the service fee, exchange rate, and what the receiver gets.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="#calculator">Calculate now</a>
+            <a class="button secondary" href="#rates">View country rates</a>
+          </div>
+        </div>
+      </section>
+
+      <section id="calculator" class="section calculator-section">
+        <div class="rates-layout">
+          <div class="rate-copy">
+            <p class="eyebrow">Automatic daily calculator</p>
+            <h2>Rates update from the live transfer calculator</h2>
+            <p>The calculator checks the live rate service, then shows the transfer fee, VAT, exchange rate, and total amount to pay.</p>
+            <p class="small-note">Countries with a public live calculation route are selectable. Other supported countries are listed in the dropdown as unavailable until live rates are exposed for them.</p>
+            <dl class="rate-stats">
+              <div>
+                <dt>Rate date</dt>
+                <dd id="todayLabel">Loading</dd>
+              </div>
+              <div>
+                <dt>Live options</dt>
+                <dd id="countryCount">Loading</dd>
+              </div>
+              <div>
+                <dt>Flow</dt>
+                <dd>They get</dd>
+              </div>
+            </dl>
+          </div>
+
+          <form class="calculator" id="rateForm">
+            <label>
+              Sending from
+              <select id="fromCountry" name="fromCountry">
+                <option value="ZA">South Africa (ZAR)</option>
+              </select>
+            </label>
+
+            <label>
+              Sending to / payout method
+              <select id="countrySelect" name="country">
+                <option value="ZWE|541">ZIMBABWE - Cash Pay (USD)</option>
+                <option value="ZWE|1437">ZIMBABWE - Ecocash (USD)</option>
+                <option value="ZWE|1440">ZIMBABWE - ZB Rand Wallet (ZAR)</option>
+              </select>
+            </label>
+
+            <label>
+              They get
+              <input id="amountInput" name="amount" type="number" min="10" max="5000" step="10" value="100">
+            </label>
+
+            <input id="amountSlider" type="range" min="10" max="5000" step="10" value="100" aria-label="Receiver amount slider">
+
+            <div class="fee-grid" aria-live="polite">
+              <div>
+                <span>Transfer fee</span>
+                <strong id="serviceFee">R0</strong>
+              </div>
+              <div>
+                <span>VAT</span>
+                <strong id="taxCharged">R0</strong>
+              </div>
+              <div>
+                <span>Exchange rate</span>
+                <strong id="exchangeRate">0.0000</strong>
+              </div>
+              <div>
+                <span>Send amount</span>
+                <strong id="sendAmount">R0</strong>
+              </div>
+            </div>
+
+            <div class="result-panel" aria-live="polite">
+              <span>Amount to pay</span>
+              <strong id="receiverGets">0</strong>
+              <small id="rateDetails">Choose a country to calculate.</small>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <section id="rates" class="section table-section">
+        <div class="section-heading table-heading">
+          <div>
+            <p class="eyebrow">Live country boards</p>
+            <h2>Automatic amount to pay in rands</h2>
+            <p class="section-note">These rows call the live calculator for each available country route. Each board ends with the highest receiver amount where the amount to pay does not exceed the R5,000 daily limit.</p>
+            <p class="source-note" id="liveRateSource">Source: checking SendHome live rates...</p>
+          </div>
+        </div>
+        <div id="countryRateBoards" class="country-rate-boards" aria-live="polite"></div>
+
+        <div class="section-heading table-heading">
+          <div>
+            <p class="eyebrow">Live routes</p>
+            <h2>Today&apos;s available rates</h2>
+          </div>
+          <label class="search-label">
+            Search
+            <input id="countrySearch" type="search" placeholder="Search country">
+          </label>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Destination</th>
+                <th>Payout method</th>
+                <th>Currency</th>
+                <th>Rate</th>
+                <th>Amount to pay for 100</th>
+              </tr>
+            </thead>
+            <tbody id="countryTable"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="how" class="section services-section">
+        <div class="section-heading">
+          <p class="eyebrow">How it works</p>
+          <h2>Simple daily pricing</h2>
+        </div>
+        <div class="service-grid">
+          <article class="service-card">
+            <span class="service-icon">01</span>
+            <h3>Pick a live route</h3>
+            <p>The calculator loads the active destination and payout method list.</p>
+          </article>
+          <article class="service-card">
+            <span class="service-icon">02</span>
+            <h3>Enter receiver amount</h3>
+            <p>Type how much the receiver must get, matching the live rate calculator flow.</p>
+          </article>
+          <article class="service-card">
+            <span class="service-icon">03</span>
+            <h3>Fees included</h3>
+            <p>The live response includes remittance amount, transfer fee, VAT, and total to pay.</p>
+          </article>
+          <article class="service-card">
+            <span class="service-icon">04</span>
+            <h3>Rates update daily</h3>
+            <p>When the backend rate updates, this calculator shows the new rate automatically.</p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <script src="script.js?v=20260615-rates-fix"></script>
+  </body>
+</html>
