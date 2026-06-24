@@ -1,0 +1,10 @@
+{
+  "name": "sendhome-rate-calculator",
+  "version": "1.0.0",
+  "description": "SendHome daily remittance rate calculator with service fees.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "license": "UNLICENSED"
+}
